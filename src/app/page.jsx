@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "antd";
+import {ThunderboltOutlined} from "@ant-design/icons";
 
 
 export default function Home() {
@@ -16,8 +19,7 @@ SENAI VALINHOS
 <div className="flex justify-center mb-6">
 <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-yellow-900 shadow-md">
 <Image
-src="/avatar.jpg" // Coloque sua imagem em public/avatar.jpg
-alt="Foto do aluno"
+src="/avatar.jpg" 
 fill
 className="object-cover"
 />
@@ -35,6 +37,18 @@ Julia Arruda Martins
 se a pessoa se lembrar de acender a luz.”
 </div>
 <div className="mt-2 text-sm text-yellow-700">— Alvo Dumbledore</div>
+<div className="mt-6 flex justify-center">
+<Link href="/infomation">
+                    <Button 
+                        type="primary" 
+                        size="large"
+                        icon={<ThunderboltOutlined />}
+                        className="!bg-yellow-900 !border-yellow-900 hover:!bg-yellow-800 hover:!border-yellow-800 !text-white"
+                    >
+                        Ver Mais Sobre a API
+                    </Button>
+                </Link>
+                </div>
 </div>
 </div>
 );
