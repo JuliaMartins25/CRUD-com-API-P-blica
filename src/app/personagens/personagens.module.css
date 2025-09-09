@@ -1,0 +1,138 @@
+.container {
+ 
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #3e2723, #1b1b1b); 
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    color: #f5f5f5; 
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #fdd835; 
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.filmGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    justify-content: center;
+}
+
+.filmCard {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, #2c2c2c, #424242);
+}
+
+.filmCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
+}
+
+.imageContainer {
+    width: 100%;
+    height: 200px; 
+    overflow: hidden;
+    border-bottom: 4px solid #fdd835; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    transition: transform 0.5s ease;
+}
+
+.filmCard:hover .image {
+    transform: scale(1.1); /* Adiciona um leve efeito de zoom ao passar o mouse */
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+    background-color: #1b1b1b; /* Fundo escuro para o conteúdo */
+    border-top: 2px solid #fdd835; /* Linha dourada para separação */
+}
+
+.filmTitle {
+    margin: 0 0 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fdd835; /* Dourado para o título */
+    text-transform: capitalize;
+}
+
+.director {
+    font-size: 16px;
+    color: #bdbdbd; /* Cinza claro */
+    margin: 5px 0;
+}
+
+.year {
+    font-size: 16px;
+    color: #9e9e9e; /* Cinza médio */
+    margin: 5px 0;
+}
+
+.rating {
+    margin-top: 15px;
+}
+
+.score {
+    display: inline-block;
+    background-color: #4caf50; /* Verde para pontuação */
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 22px;
+    color: #fdd835; /* Dourado */
+    font-weight: bold;
+}
+
+.error {
+    text-align: center;
+    padding: 40px;
+    font-size: 20px;
+    color: #e57373; /* Vermelho claro */
+    background-color: #1b1b1b; /* Fundo escuro */
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 80%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .filmGrid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .filmCard {
+        width: 100%;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+}

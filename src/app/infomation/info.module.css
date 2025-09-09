@@ -1,10 +1,8 @@
 .page {
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #4b2e2e; /* fundo marrom escuro */
-    padding: 2rem;
+    padding-top: 80px;
+    background: linear-gradient(135deg, #3e2723, #1b1b1b); 
+  
   }
   
   .container {
@@ -12,7 +10,7 @@
     width: 100%;
     margin: 0 auto;
     padding: 2rem;
-    background: #fdf6e3; /* pergaminho claro */
+    background: #fdf6e3; 
     border: 3px solid #3f1d0f;
     border-radius: 12px;
     font-family: Georgia, serif;
