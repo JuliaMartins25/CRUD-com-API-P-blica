@@ -7,8 +7,7 @@ export default function InfoPage() {
     <div className={styles.page}>
           <Header/>
       <div className={styles.container}>
-        <h1 className={styles.title}>Harry Potter API</h1>
-        <h3 className={styles.subtitle}>informações</h3>
+        <h3 className={styles.title}>informações</h3>
 
         <p className={styles.text}>
           <strong>Documentação oficial:</strong>{" "}

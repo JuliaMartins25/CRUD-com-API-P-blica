@@ -1,11 +1,11 @@
 .header {
-    background-color:  #ffbb00;
-    padding: 1rem 2rem;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    background-color: #b8860b;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 999; 
+    z-index: 999;
+    padding: 1rem 2rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
 .wrapper {
@@ -19,7 +19,7 @@
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #ffffff;
+    color:#3f1d0f;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
@@ -30,7 +30,7 @@
 }
 
 .link {
-    color: #ffffff;
+    color: #3f1d0f;
     text-decoration: none;
     position: relative;
     padding: 0.25rem 0;
@@ -44,12 +44,12 @@
     height: 2px;
     bottom: -2px;
     left: 0;
-    background-color: #ffffff;
+    background-color:#3f1d0f;
     transition: width 0.3s;
 }
 
 .link:hover {
-    color: #ffffff;
+    color: #3f1d0f;
     transform: translateY(-2px);
 }
 
