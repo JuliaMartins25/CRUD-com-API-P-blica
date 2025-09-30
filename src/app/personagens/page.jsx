@@ -1,95 +1,80 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { Button } from "antd";
 import axios from "axios";
-import styles from "./personagens.module.css";
+
+const STORAGE_KEY = "comments_salvo_na_sessionStorage";
 
 export default function Get() {
-  const [loading, setLoading] = useState(false);
-  const [characters, setcharacters] = useState([]);
-  const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [error, setError] = useState(false);
+    const router = useRouter();
 
-  const router = useRouter();
+    const buscarComments = async () => {
+        setLoading(true);
+        try {
+            // Verifica se já existe algo salvo no sessionStorage
+            const sessionStorageData = sessionStorage.getItem(STORAGE_KEY);
 
-  const buscarcharacters = async () => {
-    setLoading(true);
+            // Se existir, usa o que está salvo. Se não, faz a requisição e salva no sessionStorage
+            if (sessionStorageData) {
+                setComments(JSON.parse(sessionStorageData));
+            } else {
+                // Se não tiver nada salvo, faz a requisição
+                const response = await axios.get("https://jsonplaceholder.typicode.com/comments");
+                setComments(response.data);
+                sessionStorage.setItem(STORAGE_KEY, JSON.stringify(response.data));
+            }
+        } catch (error) {
+            setError(true);
+            console.error("Erro ao buscar comentários:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    try {
-      const response = await axios.get(
-        "https://hp-api.onrender.com/api/characters"
-      );
-      setcharacters(response.data);
-    } catch (error) {
-      setError(true);
-      console.error("❌ Erro ao buscar comentários:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    // Ir para página de detalhes
+    const navegarParaComentario = (commentId) => {
+        router.push(`/get/${commentId}`);
+    };
 
-  const navegarParaPersonagem = (characterId) => {
-    router.push(`/get/${characterId}`);
-  };
+    // Limpar sessionStorage, casso que queira forçar uma nova requisição
+    const limparSessionStorage = () => {
+        sessionStorage.removeItem(STORAGE_KEY);
+        setComments([]);
+    };
 
-  useEffect(() => {
-    buscarcharacters();
-  }, []);
+    // Busca automática quando a página carrega
+    useEffect(() => {
+        buscarComments();
+    }, []);
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Personagens de Harry Potter</h1>
-        <Link href="/infomation" className={styles.link}>
-          <Button type="primary" size="large" className={styles.botao}>
-            Voltar
-          </Button>
-        </Link>
-      </div>
+    return (
+        <div>
+            <h1>Lista de Comentários</h1>
 
-      <h2>Personagens ({characters.length})</h2>
-      {loading ? (
-        "Carregando..."
-      ) : (
-        <ul className={styles.list}>
-        {characters.map((character) => (
-          <li
-            key={character.id}
-            className={styles.card}
-            onClick={() => navegarParaPersonagem(character.id)}
-          >
-            <hr />
-            <div className={styles.imageContainer}>
-              <img
-                src={character.image}
-                alt={character.title}
-                className={styles.image}
-              />
-            </div>
-            <div className={styles.content}>
-              <h2 className={styles.filmTitle}>{character.name}</h2>
-              
-            </div>
-            <p className={styles.subtitulo}>
-              <strong>Nome:</strong> {character.name}
-            </p>
-            <p className={styles.conteudo}>
-              <strong>Casa:</strong> {character.house}
-            </p>
-            <div className={styles.rating}>
-                <Link href="/" className={styles.link}>
-                  <span className={styles.score}>
-                    Saiba Mais {character.rt_score}
-                  </span>
-                </Link>
-              </div>
-          </li>
-        ))}
-      </ul>
-      
-      )}
-      {error && <p>❌ Ocorreu um erro ao buscar os comentários.</p>}
-    </div>
-  );
+            <button onClick={limparSessionStorage}>Limpar SessionStorage</button>
+            <button onClick={buscarComments}>Recarregar</button>
+
+            <h2>Comentários ({comments.length})</h2>
+
+            {loading && <p>Carregando...</p>}
+            {error && <p>Erro ao buscar os comentários</p>}
+
+            <ul>
+                {comments.map((comment) => (
+                    <li key={comment.id} onClick={() => navegarParaComentario(comment.id)}>
+                        <hr />
+                        <p>
+                            <strong>ID:</strong> {comment.id}
+                        </p>
+                        <p>
+                            <strong>Nome:</strong> {comment.name}
+                        </p>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
